@@ -47,16 +47,19 @@ a{ text-decoration:none;}
       z-index: 10;
     }
     #canvas{
+      height: 490px;
       margin: 114px 50px 0;
+      overflow: hidden;
       .lanternsArea{
-        display: -webkit-box;
         .lantern{
+          position: absolute;
           display: -webkit-box;
           -webkit-box-pack: center;
           -webkit-box-align: center;
           text-align: center;
-          /*-webkit-box-flex: 1;*/
-          /*width: 33.33%;*/
+          img{
+            height: 440px;
+          }
         }
       }
     }

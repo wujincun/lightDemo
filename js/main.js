@@ -36,14 +36,12 @@ Slider.prototype.renderDOM = function(){
         li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0)';
         i == 1 && (li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0) scale(1.2)');
         if(item){
-            //根据窗口的比例与图片的比例来确定
-            //图片是根据宽度来等比缩放还是根据高度来等比缩放
-            li.innerHTML = '<img height="'+ this.scaleH +'" src="'+ item['img'] +'">';
+            li.innerHTML = '<img  src="'+ item['img'] +'">';
         }
-        //$(li)
+
         $(this.outer).css('width',this.scaleW * 40 + 'px');
-        $(li).addClass('lantern')
-        $(this.outer).addClass('lanternsArea')
+        $(li).addClass('lantern');
+        $(this.outer).addClass('lanternsArea');
         this.outer.appendChild(li);
 
 
@@ -209,9 +207,9 @@ var lanternRiddles = {
         this.bind()
     },
     bind:function () {
-        $('#canvas').on('touchstart','ul li img',function () {
+        /*$('#canvas').on('touchstart','ul li img',function () {
             alert(1)
-        })
+        })*/
     }
 };
 lanternRiddles.init()
