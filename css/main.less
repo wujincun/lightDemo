@@ -16,25 +16,77 @@ a{ text-decoration:none;}
 .partArea{
   overflow: hidden;
   .part{
-    margin-top: -0.1rem;
+    margin-top: -0.015rem;
+
   }
   .part1{
     background: url("../img/background_01.jpg") center center no-repeat;
     width: 640px;
-    height: 607px;
+    height: 633px;
     background-size: contain;
+    position: relative;
+    .ruleBtn{
+      position: absolute;
+      width: 200px;
+      height: 150px;
+      left: 0;
+      bottom: 0;
+    }
   }
   .part2{
     background: url("../img/background_02.jpg") center center no-repeat;
     width: 640px;
-    height: 633px;
+    height: 605px;
+    padding-top: 1px;
     background-size: contain;
+    position: relative;
+    .lanternTitle{
+      position: absolute;
+      left: 0;
+      top: -70px;
+      z-index: 10;
+    }
+    #canvas{
+      margin: 114px 50px 0;
+      .lanternsArea{
+        display: -webkit-box;
+        .lantern{
+          display: -webkit-box;
+          -webkit-box-pack: center;
+          -webkit-box-align: center;
+          text-align: center;
+          /*-webkit-box-flex: 1;*/
+          /*width: 33.33%;*/
+        }
+      }
+    }
+
+    .arrowHintArea{
+      .arrowHint{
+        position: absolute;
+        top: 0;
+        height: -webkit-calc(~"100% - 115px");
+        width: 50px;
+        margin-top: 114px;
+      }
+      .leftHint{
+        background: url("../img/left.png") center center no-repeat;
+        left: 0;
+      }
+      .rightHint{
+        background: url("../img/right.png") center center no-repeat;
+        right: 0;
+      }
+    }
   }
   .part3{
     background: url("../img/background_03.jpg") center center no-repeat;
     width: 640px;
     height: 709px;
     background-size: contain;
+    .hrefBtn{
+
+    }
   }
   .part4{
     background: url("../img/background_04.jpg") center center no-repeat;
