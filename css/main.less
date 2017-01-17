@@ -1,6 +1,5 @@
 /*CSS重置*/
-body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fildset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0;border:0;}
-body{ font-size:12px;}
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fildset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0;border:0;box-sizing: border-box}
 img{border:none;}
 ul,ol{ list-style:none;}
 input,select,textarea{outline:none;}
@@ -13,6 +12,7 @@ a{ text-decoration:none;}
 .fr{float: right}
 
 /*内容*/
+
 .partArea{
   overflow: hidden;
   .part{
@@ -31,6 +31,7 @@ a{ text-decoration:none;}
       height: 150px;
       left: 0;
       bottom: 0;
+      z-index: 20;
     }
   }
   .part2{
@@ -60,6 +61,9 @@ a{ text-decoration:none;}
           img{
             height: 440px;
           }
+        }
+        .lantern.grey{
+          filter: grayscale(.6);
         }
       }
     }
@@ -100,17 +104,22 @@ a{ text-decoration:none;}
 }
 
 /*弹层*/
+@border:4px solid #650004;
+@btnRed:#f84338;
 .popArea {
-  display: none;
+  //display: none;
   color: #fff;
   text-align: center;
+  .yellow{
+    color:#ffe882;
+  }
   .mask {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 1000;
   }
   .popContentArea {
@@ -121,13 +130,289 @@ a{ text-decoration:none;}
       top: 50%;
       z-index: 2000;
       border-radius: 25px;
-      .close {
+    }
+    .rulePop{
+      background: url("../img/rule.png") center center no-repeat;
+      width: 633px;
+      height: 644px;
+      margin-left: -316px;
+      margin-top: -322px;
+      .close{
+        height: 128px;
+        width: 128px;
         position: absolute;
-        height: 220px;
-        width: 100%;
-        bottom: -220px;
-        left: 0;
+        top: 0;
+        right: 0;
       }
     }
+    .submitAnswer{
+      .answerPageContentArea{
+        transform: translate(-50%,-50%);
+        .answerPageContent{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          .riddles,.riddlesHint{
+            margin: 0 100px;
+            color: #000000;
+            line-height: 1.5;
+            font-size: 36px;
+          }
+          .riddles{
+            margin-top: 200px;
+            height: 180px;
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+          }
+          .riddlesHint{
+            margin-top: 65px;
+          }
+          .answerInput{
+            margin-top: 80px;
+            width: 384px;
+            height: 78px;
+            border-radius: 20px;
+            text-align: center;
+          }
+          .submitBtn{
+            width: 240px;
+            height: 76px;
+            background-color: #ea3112;
+            margin: 22px auto;
+            border-radius: 15px;
+            font-size: 46px;
+            line-height: 76px;
+          }
+        }
+        .close{
+          position: absolute;
+          left: -webkit-calc(~"50% - 40px");
+          top: 0;
+          z-index: 30;
+          height: 80px;
+          width: 80px;
+        }
+      }
+      .sucOrFailPopContent{
+        .successPop{
+          background: url("../img/successPopBackground.png") center center no-repeat;
+          width: 437px;
+          height: 283px;
+          margin-left: -218px;
+          margin-top: -142px;
+          .firstTodaySucContent,.firstSucContent{
+            display: none;
+            width: 55%;
+            .firstTodaySucTitle{
+              font-size: 30px;
+              margin-bottom: 10px;
+              line-height: 1.5;
+            }
+          }
+          .firstTodaySucContent{
+            margin: 70px auto;
+            .firstTodaySucText{
+              font-size: 24px;
+              line-height: 1.3;
+            }
+          }
+          .firstSucContent{
+            margin: 100px auto;
+          }
+          .close{
+            position: absolute;
+            top: 0;
+            right: 20px;
+            width: 130px;
+            height: 60px;
+          }
+        }
+        .failPop{
+          display: block;
+          background: url("../img/failPopBackground.png") center center no-repeat;
+          width: 437px;
+          height: 248px;
+          margin-left: -218px;
+          margin-top: -124px;
+          .failPopContent{
+            display: none;
+            background-color: #fff;
+            border: @border;
+            margin: 25px 0 0 83px;
+            width: 280px;
+            border-radius: 30px;
+            min-height: 200px;
+            color: #000;
+            .title{
+              font-size: 24px;
+              margin-top: 20px;
+              line-height: 1.5;
+            }
+            .tryBtn,.nextBtn{
+              width: 210px;
+              height: 40px;
+              border: @border;
+              border-radius: 20px;
+              margin: 0 auto;
+              background-color: #ffff00;
+            }
+          }
+          .firstTodayFailContent{
+            .subTitle{
+              font-size: 20px;
+              color: #650004;
+              line-height: 1.3;
+            }
+            .tryBtn{
+              margin-top: 8px;
+              margin-bottom: 28px;
+            }
+            .nextBtn{
+              margin-bottom: 16px;
+            }
+          }
+          .firstFailContent,.secondFailContent{
+            .tryBtn,.nextBtn{
+              margin: 28px auto;
+            }
+          }
+          .thirdFailContent{
+            display: block;
+            .subTitle{
+              font-size: 20px;
+              line-height: 48px;
+            }
+            .answer{
+              width: 230px;
+              line-height: 44px;
+              background-color: #f9eebd;
+              margin: 0 auto;
+              color: #650004;
+              font-size: 30px;
+            }
+            .backBtn{
+              border: @border;
+              background-color: @btnRed;
+              width: 166px;
+              height: 40px;
+              margin: 16px auto;
+              border-radius: 20px;
+            }
+          }
+          .close{
+            background: url("../img/failPopClose.png") center center no-repeat;
+            width: 130px;
+            height: 60px;
+            background-size: 130px 48px;
+            position: absolute;
+            top: 0;
+            right: 20px;
+            z-index: 20;
+          }
+        }
+      }
+    }
+
+    .chooseCoupon{
+      .couponPageContent{
+        display: block;
+        background: url("../img/chooseCouponBackGround.jpg") center center no-repeat;
+        width: 640px;
+        height: 1136px;
+        margin-left: -320px;
+        margin-top: -568px;
+        .text{
+          margin-top: 430px;
+          font-size: 40px;
+          line-height: 1.5;
+          .subTitle{
+            font-size: 32px;
+            margin-bottom: 70px;
+          }
+        }
+        .sureBtn,.cancelBtn{
+          width: 605px;
+          height: 64px;
+          border: @border;
+          background-color: #ffdd4b;
+          line-height: 56px;
+          color: #000000;
+          border-radius: 32px;
+          font-size: 32px;
+          margin: 16px auto;
+        }
+      }
+      .couponPopContent{
+        .couponPop{
+          width: 399px;
+          height: 377px;
+          margin-left: -200px;
+          .close{
+            background: url("../img/getCouponBackClose.png") center center no-repeat;
+            height: 51px;
+            width: 51px;
+            position: absolute;
+            right: -20px;
+            top: -20px;
+          }
+        }
+        .noCouponPop,.oneChancePop{
+          background: url("../img/getCouponBackground.jpg") center center no-repeat;
+          .text{
+            color: #000;
+            font-size: 24px;
+            line-height: 50px;
+            .title{
+              font-size: 36px;
+              line-height: 50px;
+              margin-top: 30px;
+            }
+          }
+        }
+        .noCouponPop{
+          .text{
+            margin-top: 80px;
+          }
+        }
+        .getCouponPop{
+          display: block;
+          border: @border;
+          background-color: #ffe882;
+          font-size: 24px;
+          .title{
+            font-size: 52px;
+            line-height: 56px;
+            font-weight: bold;
+            color: #000;
+            margin-top: 80px;
+            span{
+              color: @btnRed;
+            }
+          }
+          .text{
+            margin-top: 26px;
+            color: #000;
+            line-height: 1.5;
+          }
+          .hrefBtn{
+            display: block;
+            border: @border;
+            background-color: @btnRed;
+            width: 276px;
+            height: 40px;
+            line-height: 32px;
+            border-radius: 20px;
+            margin: 40px auto;
+            span{
+              color: #f8f01f;
+            }
+          }
+        }
+      }
+    }
+
+
   }
 }

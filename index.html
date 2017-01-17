@@ -13,17 +13,11 @@
     </div>
     <div class="part part2">
         <div class="lanternTitle"><img src="img/lanternTitle.png"/></div>
-        <div id="canvas">
-           <!-- <ul class="lanternsArea">
-                <li class="lantern lantern1"><img src="img/lantern_1.png"/></li>
-                <li class="lantern lantern2"><img src="img/lantern_2.png"/></li>
-                <li class="lantern lantern3"><img src="img/lantern_3.png"/></li>
-            </ul>-->
-        </div>
-        <div class="arrowHintArea">
+        <div id="canvas"></div>
+        <!--<div class="arrowHintArea">
             <div class="leftHint arrowHint"></div>
             <div class="rightHint arrowHint"></div>
-        </div>
+        </div>-->
     </div>
     <div class="part part3">
         <a class="hrefBtn" href=""></a>
@@ -36,9 +30,110 @@
 <div class="popArea">
     <div class="mask"></div>
     <div class="popContentArea">
-        <div class="popContent"></div>
-        <div class="popContent"></div>
-        <div class="popContent"></div>
+        <div class="rulePop popContent">
+            <div class="close"></div>
+        </div>
+        <div class="submitAnswer">
+            <div class="answerPageContentArea popContent">
+                <img class="lanternPopBack" src="img/lanternPop_1.png">
+                <div class="answerPageContent">
+                    <div class="riddles ">头戴大红帽，身披五彩衣，好像小闹钟，清早催人起。</div>
+                    <div class="riddlesHint ">(打一动物)</div>
+                    <input class="answerInput" placeholder="点击输入答案"/>
+                    <div class="submitBtn">提交</div>
+                </div>
+                <div class="close"></div>
+            </div>
+            <div class="sucOrFailPopContent">
+                <div class="mask"></div>
+                <div class="successPop popContent">
+                    <div class="firstTodaySucContent">
+                        <div class="firstTodaySucTitle yellow">好聪明，答对了！</div>
+                        <div class="firstTodaySucText">
+                            <p>赠送您我知我药妆</p>
+                            <p>花灯券1张，</p>
+                            <p>请注意短信查收！</p>
+                        </div>
+                    </div>
+                    <div class="firstSucContent">
+                        <div class="firstTodaySucTitle yellow">好聪明，答对了！</div>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div class="failPop popContent">
+                    <div class="firstTodayFailContent failPopContent">
+                        <div class="title">不正确哦</div>
+                        <div class="subTitle">
+                            <p>赠送您一张美西时尚花灯券</p>
+                            <p>以兹鼓励</p>
+                            <p>请注意查收短信</p>
+                        </div>
+                        <div class="tryBtn">再试一次</div>
+                        <div class="nextBtn">再想想先下一题</div>
+                    </div>
+                    <div class="firstFailContent failPopContent">
+                        <div class="title">不正确哦</div>
+                        <div class="tryBtn">再试一次</div>
+                        <div class="nextBtn">再想想先下一题</div>
+                    </div>
+                    <div class="secondFailContent failPopContent">
+                        <div class="title">你的脑洞还不够大</div>
+                        <div class="tryBtn">再努力一下</div>
+                        <div class="nextBtn">放弃了下一题</div>
+                    </div>
+                    <div class="thirdFailContent failPopContent">
+                        <div class="title">
+                            <p>哔~你的智商已达上限！</p>
+                            <p>不要白费力气了</p>
+                        </div>
+                        <div class="subTitle">本题答案</div>
+                        <div class="answer">蝈蝈</div>
+                        <div class="backBtn">返回灯会</div>
+                    </div>
+                    <div class="close"></div>
+                </div>
+            </div>
+        </div>
+        <div class="chooseCoupon">
+            <div class="couponPageContent popContent">
+                <div class="text">
+                    <p class="title">您已答对<span class="yellow">22道</span>灯谜</p>
+                    <p class="subTitle yellow">荣获灯谜<span>鼻祖</span>称号</p>
+                    <p class="couponTitle">可领取<span class="yellow">3元</span>拉手优惠券</p>
+                    <p class="couponTitle">是否领取？</p>
+                </div>
+                <div class="sureBtn">是（领取奖励停止答题）</div>
+                <div class="cancelBtn">否（继续挑战更高奖励）</div>
+            </div>
+            <div class="couponPopContent">
+                <div class="getCouponPop popContent couponPop">
+                    <div class="title"><span>50</span>元拉手券</div>
+                    <div class="text">
+                        <p>已发送到你的账户</p>
+                        <p>请到我的拉手券查看</p>
+                    </div>
+                    <a class="hrefBtn"><span>点击查看：</span>我的拉手券</a>
+                    <div class="close"></div>
+                </div>
+                <div class="oneChancePop popContent couponPop">
+                    <div class="text">
+                        <p class="title">亲</p>
+                        <p>今日你已获得过该称号</p>
+                        <p>不可重复获取</p>
+                        <p>请继续挑战其他称号奖品吧！</p>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div class="noCouponPop popContent couponPop">
+                    <div class="text">
+                        <p>今日获得该称号用户已达上限</p>
+                        <p>奖品已被一抢而空</p>
+                        <p>请明日早点来领~</p>
+                    </div>
+                    <div class="close"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="js/flexible.js"></script>

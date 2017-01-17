@@ -36,7 +36,7 @@ Slider.prototype.renderDOM = function(){
         li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0)';
         i == 1 && (li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0) scale(1.2)');
         if(item){
-            li.innerHTML = '<img  src="'+ item['img'] +'">';
+            li.innerHTML = '<img class="img'+ index +'"  src="'+ item['img'] +'">';
         }
 
         $(this.outer).css('width',this.scaleW * 40 + 'px');
@@ -170,6 +170,9 @@ Slider.prototype.bindDOM = function(){
                 self.goIndex('+1');
             }else{
                 self.goIndex('0');
+                if(evt.target.nodeName.toLowerCase() == 'img'){
+                    
+                }
             }
         }
     };
@@ -184,12 +187,12 @@ var list = [
     {
         height: 440,
         width: 155,
-        img: "img/lantern_1.png"
+        img: "img/lantern_0.png"
     },
     {
         height: 440,
         width: 142,
-        img: "img/lantern_2.png"
+        img: "img/lantern_1.png"
     },
     {
         height: 440,
@@ -207,9 +210,14 @@ var lanternRiddles = {
         this.bind()
     },
     bind:function () {
-        /*$('#canvas').on('touchstart','ul li img',function () {
-            alert(1)
-        })*/
+        var $popArea = $('.popArea');
+        $('.ruleBtn').on('click',function () {
+            $popArea.show();
+            $popArea.find('.rulePop').show().siblings().hide();
+        });
+        $('.popContent').on('click','.close',function () {
+            $popArea.hide();
+        })
     }
 };
-lanternRiddles.init()
+lanternRiddles.init();
