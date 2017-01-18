@@ -36,7 +36,7 @@ Slider.prototype.renderDOM = function(){
         li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0)';
         i == 1 && (li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0) scale(1.2)');
         if(item){
-            li.innerHTML = '<img class="img'+ index +'"  src="'+ item['img'] +'">';
+            li.innerHTML = '<img class="lanternImg" data-LanternIndex="'+ index +'" data-num="3" src="'+ item['img'] +'">';
         }
 
         $(this.outer).css('width',this.scaleW * 40 + 'px');
@@ -115,7 +115,6 @@ Slider.prototype.bindDOM = function(){
             target = target.parentNode;
         }
         self.target = target;
-
     };
 
     //手指移动的处理事件
@@ -170,13 +169,25 @@ Slider.prototype.bindDOM = function(){
                 self.goIndex('+1');
             }else{
                 self.goIndex('0');
-                if(evt.target.nodeName.toLowerCase() == 'img'){
-                    
-                }
+                var $target = $(evt.target);
+                handleLantern($target);
             }
         }
     };
 
+    //点击灯笼弹层出现
+    var handleLantern = function ($target) {
+        if($target.hasClass('lanternImg')){
+            var num = $target.attr('data-num'),lanternIndex = $target.attr('data-lanternIndex');
+            var $popArea = $('.popArea'),$answerPageContentArea = $popArea.find('.answerPageContentArea'),$lanternPopBackImg = $answerPageContentArea.find('.lanternPopBackImg');
+            $lanternPopBackImg.attr('src','./img/lanternPop_'+lanternIndex+'.png');
+            $popArea.show();
+            $answerPageContentArea.show()
+
+
+
+        }
+    };
     //绑定事件
     outer.addEventListener('touchstart', startHandler);
     outer.addEventListener('touchmove', moveHandler);

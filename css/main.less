@@ -58,16 +58,24 @@ a{ text-decoration:none;}
           -webkit-box-pack: center;
           -webkit-box-align: center;
           text-align: center;
-          img{
+          .lanternImg{
             height: 440px;
           }
-        }
-        .lantern.grey{
-          filter: grayscale(.6);
+          .lanternImg.grey{
+            filter: grayscale(.6);
+          }
         }
       }
     }
-
+    .getCouponBtn{
+      display: none;
+      background: url("../img/getCouponBtn.png") center center no-repeat;
+      width: 84px;
+      height: 50px;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
     .arrowHintArea{
       .arrowHint{
         position: absolute;
@@ -107,7 +115,7 @@ a{ text-decoration:none;}
 @border:4px solid #650004;
 @btnRed:#f84338;
 .popArea {
-  //display: none;
+  display: none;
   color: #fff;
   text-align: center;
   .yellow{
@@ -230,7 +238,6 @@ a{ text-decoration:none;}
           }
         }
         .failPop{
-          display: block;
           background: url("../img/failPopBackground.png") center center no-repeat;
           width: 437px;
           height: 248px;
@@ -317,7 +324,7 @@ a{ text-decoration:none;}
 
     .chooseCoupon{
       .couponPageContent{
-        display: block;
+        display: none;
         background: url("../img/chooseCouponBackGround.jpg") center center no-repeat;
         width: 640px;
         height: 1136px;
@@ -377,7 +384,6 @@ a{ text-decoration:none;}
           }
         }
         .getCouponPop{
-          display: block;
           border: @border;
           background-color: #ffe882;
           font-size: 24px;
