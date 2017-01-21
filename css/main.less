@@ -99,8 +99,13 @@ a{ text-decoration:none;}
     width: 640px;
     height: 709px;
     background-size: contain;
+    padding: 205px 0 0 95px;
+    font-size: 0;
     .hrefBtn{
-
+      display: inline-block;
+      width: 220px;
+      height: 225px;
+      margin: 0 10px 54px 0;
     }
   }
   .part4{
@@ -187,11 +192,14 @@ a{ text-decoration:none;}
           .submitBtn{
             width: 240px;
             height: 76px;
-            background-color: #ea3112;
+            background-color: #777777;
             margin: 22px auto;
             border-radius: 15px;
             font-size: 46px;
             line-height: 76px;
+          }
+          .submitBtn.active{
+            background-color: #ea3112;
           }
         }
         .close{
@@ -204,12 +212,17 @@ a{ text-decoration:none;}
         }
       }
       .sucOrFailPopContent{
+        display: none;
+        .mask{
+          z-index: 3000;
+        }
         .successPop{
           background: url("../img/successPopBackground.png") center center no-repeat;
           width: 437px;
           height: 283px;
           margin-left: -218px;
           margin-top: -142px;
+          z-index: 4000;
           .firstTodaySucContent,.firstSucContent{
             display: none;
             width: 55%;
@@ -243,6 +256,7 @@ a{ text-decoration:none;}
           height: 248px;
           margin-left: -218px;
           margin-top: -124px;
+          z-index: 4000;
           .failPopContent{
             display: none;
             background-color: #fff;
@@ -321,7 +335,6 @@ a{ text-decoration:none;}
         }
       }
     }
-
     .chooseCoupon{
       .couponPageContent{
         display: none;
@@ -418,7 +431,5 @@ a{ text-decoration:none;}
         }
       }
     }
-
-
   }
 }

@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2017/1/14.
  */
-
 //构造函数
 function Slider(opts){
     //构造函数需要的参数
@@ -23,32 +22,52 @@ Slider.prototype.init = function() {
 };
 //第二步 -- 根据数据渲染DOM
 Slider.prototype.renderDOM = function(){
-    var wrap = this.wrap;
-    var data = this.list;
-
-    this.outer = document.createElement('ul');
+    var self = this;
+    var wrap = self.wrap;
+    var list = self.list;
+    self.outer = document.createElement('ul');
     //根据元素的
-    for(var i = 0; i < 40; i++){
-        var li = document.createElement('li');
-        var index = Math.floor(Math.random()*3);
-        var item = data[index];
-        li.style.width = this.scaleW +'px';
-        li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0)';
-        i == 1 && (li.style.webkitTransform = 'translate3d('+ i*this.scaleW +'px, 0, 0) scale(1.2)');
-        if(item){
-            li.innerHTML = '<img class="lanternImg" data-LanternIndex="'+ index +'" data-num="3" src="'+ item['img'] +'">';
+    $.ajax({
+        url:'./mock.json',
+        type:'GET',
+        dataType:'json',
+        data:{
+            type:'init'
         }
+    }).done(function (data) {
+        var code = data.code;
+        self.lanternRiddles = data.result;
+        for(var i = 0; i < self.lanternRiddles.length; i++) {
+            var li = document.createElement('li');
+            var index = Math.floor(Math.random() * 3);
+            var item = list[index];
+            var status = "normal",imgSrc = item['img'];
+            switch (Number(self.lanternRiddles[i].status)){
+                case -1:
+                    status = "grey";
+                    break;
+                case 1:
+                    status = "bright";
+                    imgSrc = item['brightImg']
+            }
 
-        $(this.outer).css('width',this.scaleW * 40 + 'px');
-        $(li).addClass('lantern');
-        $(this.outer).addClass('lanternsArea');
-        this.outer.appendChild(li);
+            li.style.width = self.scaleW + 'px';
+            li.style.webkitTransform = 'translate3d(' + i * self.scaleW + 'px, 0, 0)';
+            i == 1 && (li.style.webkitTransform = 'translate3d(' + i * self.scaleW + 'px, 0, 0) scale(1.2)');
 
+            if (item) {
+                li.innerHTML = '<img class="lanternImg '+ status +'" data-LanternIndex="' + index + '" data-num="2" data-index="'+ i +'" src="' + imgSrc + '">';
+            }
 
-    }
+            $(self.outer).css('width', self.scaleW * 40 + 'px');
+            $(li).addClass('lantern');
+            $(self.outer).addClass('lanternsArea');
+            self.outer.appendChild(li);
+        }
+    });
 
     //UL的宽度和画布宽度一致
-    wrap.appendChild(this.outer);
+    wrap.appendChild(self.outer);
 };
 Slider.prototype.goIndex = function(n){
     var idx = this.idx;
@@ -177,15 +196,30 @@ Slider.prototype.bindDOM = function(){
 
     //点击灯笼弹层出现
     var handleLantern = function ($target) {
-        if($target.hasClass('lanternImg')){
-            var num = $target.attr('data-num'),lanternIndex = $target.attr('data-lanternIndex');
-            var $popArea = $('.popArea'),$answerPageContentArea = $popArea.find('.answerPageContentArea'),$lanternPopBackImg = $answerPageContentArea.find('.lanternPopBackImg');
+        if($target.hasClass('lanternImg') && !$target.hasClass('bright') && !$target.hasClass('grey')){
+            /*
+            * num:答题次数
+            * index：40个排在第几个
+            * lanternIndex：第几个形状的灯笼
+            * */
+            var num = $target.attr('data-num'),index = $target.attr('data-index'),lanternIndex = $target.attr('data-lanternIndex');
+            var $popArea = $('.popArea'),
+                $submitAnswer = $popArea.find('.submitAnswer'),
+                $answerPageContentArea = $submitAnswer.find('.answerPageContentArea'),
+                $lanternPopBackImg = $answerPageContentArea.find('.lanternPopBackImg'),
+                $lanternPopContent = $answerPageContentArea.find('.answerPageContent'),
+                $lanternSubmitBtn = $lanternPopContent.find('.submitBtn');
+
+
             $lanternPopBackImg.attr('src','./img/lanternPop_'+lanternIndex+'.png');
+            //谜面
+            $lanternPopContent.find('.riddles').text(self.lanternRiddles[lanternIndex].riddle);
+            $lanternPopContent.find('.riddlesHint').text(self.lanternRiddles[lanternIndex].riddlesHint);
+            $lanternSubmitBtn.attr('data-index',index);
+            $lanternSubmitBtn.attr('data-num',num);
             $popArea.show();
+            $submitAnswer.show().siblings().hide();
             $answerPageContentArea.show()
-
-
-
         }
     };
     //绑定事件
@@ -198,17 +232,20 @@ var list = [
     {
         height: 440,
         width: 155,
-        img: "img/lantern_0.png"
+        img: "img/lantern_0.png",
+        brightImg:'img/lantern_0_bright.png'
     },
     {
         height: 440,
         width: 142,
-        img: "img/lantern_1.png"
+        img: "img/lantern_1.png",
+        brightImg:'img/lantern_1_bright.png'
     },
     {
         height: 440,
         width: 144,
-        img: "img/lantern_2.png"
+        img: "img/lantern_2.png",
+        brightImg:'img/lantern_2_bright.png'
     }
 ];
 var lanternRiddles = {
@@ -221,14 +258,56 @@ var lanternRiddles = {
         this.bind()
     },
     bind:function () {
-        var $popArea = $('.popArea');
+        var _this = this,
+            $popArea = $('.popArea'),
+            $submitAnswer = $popArea.find('.submitAnswer'),
+            $answerPageContentArea = $submitAnswer.find('.answerPageContentArea'),
+            $answerPageContent = $answerPageContentArea.find('.answerPageContent'),
+            $answerInput = $answerPageContent.find('.answerInput'),
+            $submitBtn = $answerPageContent.find('.submitBtn'),
+            $sucOrFailPopContent = $submitAnswer.find('.sucOrFailPopContent'),
+            $chooseCoupon = $popArea.find('.chooseCoupon'),
+            $couponPageContent = $chooseCoupon.find('.couponPageContent'),
+            $couponPopContent = $chooseCoupon.find('.couponPopContent');
         $('.ruleBtn').on('click',function () {
             $popArea.show();
             $popArea.find('.rulePop').show().siblings().hide();
         });
         $('.popContent').on('click','.close',function () {
             $popArea.hide();
+        });
+        /*除了灯笼相关事件（点击和滑动），其余事件写在此处*/
+        $answerInput.on('input',function () {
+            var inputVal = $(this).val();
+            if(inputVal != ''){
+                $submitBtn.addClass('active')
+            }else{
+                $submitBtn.removeClass('active')
+            }
+        });
+        $submitBtn.on('click',function () {
+            if($(this).hasClass('active')){
+                var inputVal = $answerInput.val();
+                var index = $(this).attr('data-index');//第几个灯笼
+                var num = $(this).attr('data-num');//第几次答题
+                $.ajax({
+                    url:'./mock.json',
+                    type:'GET',
+                    dataType:'json',
+                    data:{
+                        type:'answer',
+                        answer:inputVal,
+                        index:index,
+                        answerNum:num
+                    }
+                }).done(function(data){
+                    _this.dataProcess(data)
+                })
+            }
         })
+    },
+    dataProcess:function (data) {
+
     }
 };
 lanternRiddles.init();

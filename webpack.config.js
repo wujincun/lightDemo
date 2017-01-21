@@ -15,7 +15,7 @@ var config = {
     ],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'js/lanternRiddles.js'
+        filename: 'js/main.js'
     },
     module: {
         loaders: [

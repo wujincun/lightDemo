@@ -1,0 +1,20 @@
+{
+  "code":"200",
+  "result":[
+    {
+      "riddle":"石泉师妹",
+      "hint":"大一动物",
+      "status":"-1"
+    },
+    {
+      "riddle":"石泉师妹是深深的",
+      "hint":"大一动物sss",
+      "status":"1"
+    },
+    {
+      "riddle":"石泉师妹wowo",
+      "hint":"大一动物nini",
+      "status":"0"
+    }
+  ]
+}
